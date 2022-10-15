@@ -1,0 +1,84 @@
+{% load static %}
+<nav class="navbar z navbar-dark bg-dark navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'home' %}"><img height="50px" width="50px"
+        src="{% static 'images/logo.svg' %}" /></a>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <h4 class="font-weight-light">
+            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+          </h4>
+        </li>
+        <li class="nav-item">
+          <h4 class="font-weight-light">
+            <a class="nav-link active" href="/mycart">My Books</a>
+          </h4>
+        </li>
+        <li class="nav-item">
+          <h4 class="font-weight-light">
+            <a class="nav-link active" href="/allbooks">All Books</a>
+          </h4>
+        </li>
+        <form class="d-flex" role="search" method="GET" action="{% url 'allbooks' %}">
+          <input class="form-control me-2" type="text" name="q" placeholder="Search for Books, Authors..."
+            aria-label="Search" />
+        </form>
+      </ul>
+    </div>
+
+    {% if user.is_authenticated %}
+
+    <ul class="nav navbar-nav my-2 my-lg-0">
+      <li class="nav-item">
+        <div class="lead" style="text-transform: capitalize; color: white" class="nav-link font-weight-light">
+          <i class="fas fa-user"></i> {{user.username}}<br />
+        </div>
+        <a class="fas fa-user" style="color: rgb(143, 135, 135)" href="/logout">Logout</a>
+      </li>
+    </ul>
+
+    {% else %}
+    <div class="nav navbar-nav navbar-right">
+      <span class="navbar-nav me-auto mb-2 mb-lg-0">
+        <button type="button" class="btn btn-secondary">
+          <a style="color: rgb(255, 255, 255); text-decoration: none" href="/login">SIGN IN</a>
+        </button>
+      </span>
+    </div>
+
+    {% endif %}
+  </div>
+</nav>
+{% if messages %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  {% for msg in messages %} {{msg}} {% endfor %}
+</div>
+{% endif %}
+
+<!-- OLD CODE  -->
+<!-- <h1><a href="{% url 'home' %}">LOGO</a></h1>
+
+<form method="GET" action="{% url 'home' %}">
+  <input type="text" name="q" placeholder="Search books.." >
+</form> -->
+
+<!-- {% if user.is_authenticated %}
+        <li>
+        <a  href="/logout">Logout</a>
+      </li>
+      <li>
+        Welcome, {{user.username}}
+      </li>
+
+      {% else %}
+
+      <li >
+        <a href="/login">Login</a>
+      </li>
+
+      {% endif %}
+
+
+<hr> -->

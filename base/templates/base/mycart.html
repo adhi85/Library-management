@@ -1,0 +1,105 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+
+<br />
+
+{% if user.book1 == "no" and user.book2 == "no" %}
+<br />
+<br />
+<div class="container" style="background-color: #eee; height: 600px; width: 900px ;">
+  <center>
+    <img src="{% static 'images/oops.png' %}" />
+    <br />
+    <br />
+    <h1 style="font-family: Times New Roman, Times, serif">
+      YOU DON'T HAVE ANY BOOKS. <a href="/allbooks"><br><h3>BORROW ONE ?</h3></a>
+    </h1>
+  </center>
+</div>
+{% else %}
+
+<div class="container bootstrap snippets bootdeys">
+  <div class="center-heading">
+    <h2 class="font-weight-light">MY BOOKS</h2>
+    <span class="center-line"></span>
+  </div>
+
+  <div class="row">
+    <div class="col-md-15 col-md-offset-1">
+      <div class="row">
+        {% if user.book1 != "no" %}
+        <div class="col-sm-4 margin40">
+          <div class="item-img-wrap">
+            <img src="{{buk1.coverpage}}" style="height: 500px" class="img-responsive" alt="workimg" />
+            <div class="item-img-overlay">
+              <span></span>
+            </div>
+          </div>
+          <div class="work-desc shadow-lg p-3 mb-5 bg-white">
+            <blockquote class="blockquote">
+              <p class="mb-2" style="text-transform: uppercase">
+                <a> {{user.book1}}</a>
+              </p>
+              <footer class="blockquote-footer" style="text-transform: capitalize">
+                <cite title="Source Title">{{buk1.author}}</cite>
+              </footer>
+            </blockquote>
+
+            <a style="
+                height: 40px;
+                width: 100%;
+                background-color: rgb(195, 90, 90);
+                color: white;
+              " href="{% url 'return_book' buk1.id %}" class="btn font-weight-light">RETURN</a>
+          </div>
+          <!--work desc-->
+        </div>
+        <!--speakers col end-->
+        {% endif %} {% if user.book2 != "no" %}
+        <div class="col-sm-4 margin50">
+          <div class="item-img-wrap">
+            <img src="{{buk2.coverpage}}" style="height: 500px" class="img-responsive" alt="workimg" />
+            <div class="item-img-overlay">
+              <span></span>
+            </div>
+          </div>
+          <div class="work-desc shadow p-3 mb-5 bg-white">
+            <blockquote class="blockquote">
+              <p class="mb-2" style="text-transform: uppercase">
+                {{user.book2}}
+              </p>
+              <footer class="blockquote-footer" style="text-transform: capitalize">
+                <cite title="Source Title">{{buk2.author}}</cite>
+              </footer>
+            </blockquote>
+
+            <a style="
+                height: 40px;
+                width: 100%;
+                background-color: rgb(195, 90, 90);
+                color: white;
+              " href="{% url 'return_book' buk2.id %}" class="btn font-weight-light">RETURN</a>
+          </div>
+          <!--work desc-->
+        </div>
+        <!--speakers col end-->
+      </div>
+      <!--speakers row end-->
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endif %} {% endblock %}
+
+<!-- OLD CODE -->
+
+<!-- {% if user.book1 != "no" %}
+    <h3>Name: {{user.book1}}</h3>
+    <a href="{% url 'return_book' buk1.id %}" >RETURN BOOK</a>
+    <hr>
+{% endif %}
+{% if user.book2 != "no" %}
+    <h3>Name: {{user.book2}}</h3>
+    <a href="{% url 'return_book' buk2.id %}" >RETURN BOOK</a>
+    <hr>
+    {% endif %} -->

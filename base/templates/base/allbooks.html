@@ -1,0 +1,90 @@
+{% extends 'main.html' %} {% load static %} {% block content %} {% if all %}
+
+<div class="container bootstrap snippets bootdeys">
+  <div class="center-heading">
+    <br />
+    <h2 class="font-weight-light">ALL BOOKS</h2>
+    <span class="center-line"></span>
+  </div>
+
+  <div class="row">
+    <div class="col-md-15 col-md-offset-1">
+      <div class="row">
+        {% for books in book %} {% if books.copies > 0 %}
+
+        <div class="col-sm-4 margin40">
+          <div class="item-img-wrap">
+            <a href="{% url 'confirm' books.id %}">
+              <img src="{{books.coverpage}}" style="height: 500px" class="img-responsive" alt="wait a second" /></a>
+            <div class="item-img-overlay">
+              <a href="{% url 'confirm' books.id %}">
+                <span></span>
+              </a>
+            </div>
+          </div>
+          <div class="work-desc">
+            <blockquote class="blockquote">
+              <p class="mb-2" style="text-transform: uppercase">
+                <a> {{books.name}}</a>
+              </p>
+              <footer class="blockquote-footer" style="text-transform: capitalize">
+                <cite title="Source Title">{{books.author}}</cite>
+              </footer>
+              <h6 class="font-weight-light">
+                <a> COPIES REMAINING: {{books.copies}}</a>
+              </h6>
+            </blockquote>
+            <span></span>
+          </div>
+          <!--work desc-->
+        </div>
+        <!--speakers col end-->
+        {% else %}
+
+        <div class="col-sm-4 margin40">
+          <div class="item-img-wrap">
+            <img src="{{books.coverpage}}" style="height: 500px" class="img-responsive" alt="wait a second" />
+            <div class="item-img-overlay">
+              <span></span>
+            </div>
+          </div>
+          <div class="work-desc">
+            <span></span>
+            <blockquote class="blockquote">
+              <p class="mb-2" style="text-transform: uppercase">
+                <a> {{books.name}}</a>
+              </p>
+              <footer class="blockquote-footer" style="text-transform: capitalize">
+                <cite title="Source Title">{{books.author}}</cite>
+              </footer>
+              <h6 class="font-weight-light">
+                <a> Sorry, No copies available</a>
+              </h6>
+            </blockquote>
+          </div>
+          <!--work desc-->
+        </div>
+        <!--speakers col end-->
+
+        {% endif %} {% endfor %}
+      </div>
+      <!--speakers row end-->
+    </div>
+  </div>
+</div>
+
+{% else %}
+<br />
+<br />
+<div class="container" style="background-color: #eee; height: 600px; width: 900px ;">
+  <center>
+    <img src="{% static 'images/oops.png' %}" />
+    <br />
+    <br />
+    <h1 style="font-family: Times New Roman, Times, serif">
+      LIBRARY HAS NO BOOKS
+    </h1>
+  </center>
+</div>
+
+{% endif %} {% endblock %}

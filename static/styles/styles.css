@@ -1,0 +1,217 @@
+@media (max-width: 768px) {
+  .carousel-inner .carousel-item>div {
+    display: none;
+  }
+
+  .carousel-inner .carousel-item>div:first-child {
+    display: block;
+  }
+}
+
+.carousel-inner .carousel-item.active,
+.carousel-inner .carousel-item-next,
+.carousel-inner .carousel-item-prev {
+  display: flex;
+}
+
+/* display 3 */
+@media (min-width: 768px) {
+
+  .carousel-inner .carousel-item-right.active,
+  .carousel-inner .carousel-item-next {
+    transform: translateX(33.333%);
+  }
+
+  .carousel-inner .carousel-item-left.active,
+  .carousel-inner .carousel-item-prev {
+    transform: translateX(-33.333%);
+  }
+}
+
+.carousel-inner .carousel-item-right,
+.carousel-inner .carousel-item-left {
+  transform: translateX(0);
+}
+
+
+
+
+/* ALLBOOKS CSS */
+
+
+a {
+  color: #333;
+  -moz-transition: all 200ms ease-in;
+  -o-transition: all 200ms ease-in;
+  -webkit-transition: all 200ms ease-in;
+  transition: all 200ms ease-in;
+}
+
+a:hover,
+a:focus {
+  color: #32c5d2;
+  text-decoration: none;
+}
+
+.margin40 {
+  margin-bottom: 40px;
+}
+
+/************************image hover effect*******************/
+.item-img-wrap {
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+}
+
+.item-img-wrap img {
+  -moz-transition: all 200ms linear;
+  -o-transition: all 200ms linear;
+  -webkit-transition: all 200ms linear;
+  transition: all 200ms linear;
+  width: 100%;
+}
+
+.item-img-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+
+.item-img-overlay span {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: url(http://bootstraplovers.com/templates/assan-2.2/main-template/img/plus.png) no-repeat center center rgba(0, 0, 0, 0.7);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  opacity: 0;
+  -moz-transition: opacity 250ms linear;
+  -o-transition: opacity 250ms linear;
+  -webkit-transition: opacity 250ms linear;
+  transition: opacity 250ms linear;
+}
+
+.item-img-wrap:hover .item-img-overlay span {
+  opacity: 1;
+}
+
+.item-img-wrap:hover img {
+  -moz-transform: scale(1.1);
+  -o-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.work-desc {
+  width: 100%;
+  padding: 10px 10px;
+  background: #FFF;
+  border-top: none;
+  position: relative;
+}
+
+.work-desc:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -8px;
+  margin-left: 20px;
+  width: 8px;
+  height: 8px;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid #fff;
+  z-index: 100;
+}
+
+.work-desc h3 {
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+
+/*******section heading**********/
+.center-heading {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.center-heading h2 {
+  margin-bottom: 0;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #333;
+  font-size: 25px;
+}
+
+.center-heading p {
+  font-size: 20px;
+  line-height: 35px;
+}
+
+.center-heading h2 strong {
+  font-weight: 700;
+}
+
+.center-line {
+  display: inline-block;
+  width: 70px;
+  height: 1px;
+  border-top: 1px solid #bbb;
+  /* border-bottom: 1px solid $skincolor; */
+  margin: auto;
+}
+
+.center-heading p {
+  margin-top: 10px;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+/* TOOLTIP */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  top: -5px;
+  left: 110%;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent black transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
