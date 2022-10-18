@@ -1,5 +1,7 @@
 #READ ME
 
+TIME TO COMPLETE THE ASSIGNMENT : 2.5 DAYS
+
 REQUIREMENTS
 
 Implemented the website using Python Django.
