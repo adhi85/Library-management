@@ -19,7 +19,7 @@ class Book(models.Model):
     name = models.CharField(max_length=100)
     author = models.CharField(max_length=100)
     publisher = models.CharField(max_length=100)
-    year_published = models.DateField()
+    
     copies = models.IntegerField()
-    timestamp = models.DateTimeField(auto_now_add=True)
+    added_date = models.DateTimeField(auto_now_add=True)
     coverpage = models.TextField()

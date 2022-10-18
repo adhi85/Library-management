@@ -14,7 +14,7 @@ from django.contrib.auth.decorators import login_required
 
 def home(request):
 
-    book = Book.objects.order_by('-timestamp')[:5]
+    book = Book.objects.order_by('-added_date')[:5]
     book_trending = Book.objects.order_by('copies')[:5]
 
     context = {'book': book, 'book_trending': book_trending}

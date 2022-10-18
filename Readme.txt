@@ -1,12 +1,15 @@
 #READ ME
 
+TIME TO COMPLETE THE ASSIGNMENT : 2.5 DAYS
+
 REQUIREMENTS
 
 Implemented the website using Python Django.
-Used Redis with default Django SQLite Database.
+Used Redis with Mysql Database.
 Used Html,Javascript and CSS with Django Templating engine.
 Used Bootstrap for styling.
 Used virtual environment.
+The website is connected with Mysql database.
 
 
 
@@ -15,9 +18,8 @@ HOW TO COMPILE AND RUN CODE TO TEST
 SETTING UP VIRTUAL ENVIRONMENT
 1.	Open cmd
 2.	Install virtual environment using "pip install virtualenv"
-3.	create a virtual environment by eg: "virtualenv venv"
-4.	extract the zip file.
-5.	Move the virtual environment venv inside the extracted Django project Library
+3.	create a virtual environment by command " virtualenv venv"
+4.	Move the virtual environment venv inside the extracted Django project Library
 
 RUN DJANGO SERVER
 1.	Open the extracted library folder in any IDE (VS Code)
@@ -28,15 +30,11 @@ RUN DJANGO SERVER
 6.	The website can be viewed from there.
 
 
-ADDING BOOKS (FOR ADMINS ONLY)
-1.	Open http://127.0.0.1:8000/admin in your browser
-2.	Enter the Admin details.
-3.	Username: admin
-4.	Password: admin
-5.	You access the database and can add books to the library 
 
 HOW TO USE REDIS SERVER 
 1.	Install Redis from the link for windows.
 LINK: https://github.com/MicrosoftArchive/redis/releases/download/win-3.2.100/Redis-x64-3.2.100.msi
 2.	Run the redis server
 3.	From redis folder open redis-cli  
+
+
