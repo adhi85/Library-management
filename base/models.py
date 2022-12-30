@@ -23,3 +23,4 @@ class Book(models.Model):
     copies = models.IntegerField()
     added_date = models.DateTimeField(auto_now_add=True)
     coverpage = models.TextField()
+

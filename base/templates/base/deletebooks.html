@@ -3,7 +3,9 @@
 <div class="container bootstrap snippets bootdeys">
   <div class="center-heading">
     <br />
-    <h2 class="font-weight-light">ALL BOOKS</h2>
+    
+    <h2 class="font-weight-light">DELETE COPIES</h2>
+    
     <span class="center-line"></span>
   </div>
 
@@ -14,14 +16,24 @@
 
         <div class="col-sm-4 margin40">
           <div class="item-img-wrap">
+            {% if request.user.is_superuser == True  %}
+            <a href="{% url 'deletebook' books.id %}"></a>
+            {% else %}
             <a href="{% url 'confirm' books.id %}">
+            {% endif %}
               <img src="{{books.coverpage}}" style="height: 500px" class="img-responsive" alt="wait a second" /></a>
             <div class="item-img-overlay">
-              <a href="{% url 'confirm' books.id %}">
+              {% if request.user.is_superuser == True  %}
+            <a href="{% url 'deletebook' books.id %}">
+            {% else %}
+            <a href="{% url 'confirm' books.id %}">
+            {% endif %}
                 <span></span>
               </a>
             </div>
           </div>
+
+
           <div class="work-desc">
             <blockquote class="blockquote">
               <p class="mb-2" style="text-transform: uppercase">
@@ -39,7 +51,9 @@
           <!--work desc-->
         </div>
         <!--speakers col end-->
+    
 
+        
 
         {% endif %} {% endfor %}
       </div>
@@ -63,32 +77,3 @@
 </div>
 
 {% endif %} {% endblock %}
-
-
-
-<!-- OLD CODE -->
-<!-- 
-<div class="col-sm-4 margin40">
-  <div class="item-img-wrap">
-    <img src="{{books.coverpage}}" style="height: 500px" class="img-responsive" alt="wait a second" />
-    <div class="item-img-overlay">
-      <span></span>
-    </div>
-  </div>
-  <div class="work-desc">
-    <span></span>
-    <blockquote class="blockquote">
-      <p class="mb-2" style="text-transform: uppercase">
-        <a> {{books.name}}</a>
-      </p>
-      <footer class="blockquote-footer" style="text-transform: capitalize">
-        <cite title="Source Title">{{books.author}}</cite>
-      </footer>
-      <h6 class="font-weight-light">
-        <a> Sorry, No copies available</a>
-      </h6>
-    </blockquote>
-  </div> -->
-  <!--work desc-->
-<!-- </div> -->
-<!--speakers col end-->

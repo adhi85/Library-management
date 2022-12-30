@@ -9,7 +9,7 @@
         <img src="{% static 'images/login.png' %}" class="img-fluid" alt="Sample image" />
       </div>
       <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-        <u><h1>Sign in As User</h1></u>
+        <u><h1>Sign in As Admin</h1></u>
         <hr>
         <form method="post">
           {% csrf_token %}
@@ -37,10 +37,6 @@
               ">
               Login
             </button>
-            <p class="small fw-bold mt-2 pt-1 mb-0">
-              Don't have an account?
-              <a href="/register" style="color: rgb(210, 25, 25)" class="fs-5">Register</a>
-            </p>
           </div>
         </form>
       </div>
@@ -50,18 +46,3 @@
 
 {% endblock %}
 
-<!-- OLD CODE -->
-<!-- <section style="background-color: rgb(216, 213, 213);">
-  <br>
-<h2 >Log In</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Log In</button>
-</form>
-<br>
-<br>
-<br>
-<p class="text-center">Don't have an account? <a href="/register">Create an account</a>.</p>
-
-</section> -->

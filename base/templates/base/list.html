@@ -1,0 +1,29 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+<br>
+
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <th>User</th>
+        <th>Book 1</th>
+        <th>Book 2</th>
+    </tr>
+    {% for user in users %}
+    <tr>
+        <td>{{user.id}}</td>
+        <td style="text-transform: uppercase;">{{user.username}}</td>
+        {% if user.book1 == "no" %}
+        <td>-</td>
+        {% else %}
+        <td>{{user.book1}}</td>
+        {% endif %}
+        {% if user.book2 == "no" %}
+        <td>-</td>
+        {% else %}
+        <td>{{user.book2}}</td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

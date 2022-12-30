@@ -21,6 +21,25 @@
             <a class="nav-link active" href="/allbooks">All Books</a>
           </h4>
         </li>
+        {% if request.user.is_superuser == True  %}
+        <li class="nav-item">
+          <h4 class="font-weight-light">
+            <a class="nav-link active" href="/addbook">Add Books</a>
+          </h4>
+        </li>
+
+        <li class="nav-item">
+          <h4 class="font-weight-light">
+            <a class="nav-link active" href="/deletebooks">Delete Books</a>
+          </h4>
+        </li>
+
+        <li class="nav-item">
+          <h4 class="font-weight-light">
+            <a class="nav-link active" href="/list">List Books</a>
+          </h4>
+        </li>
+        {% endif %}
         <form class="d-flex" role="search" method="GET" action="{% url 'allbooks' %}">
           <input class="form-control me-2" type="text" name="q" placeholder="Search for Books, Authors..."
             aria-label="Search" />
@@ -43,11 +62,18 @@
     <div class="nav navbar-nav navbar-right">
       <span class="navbar-nav me-auto mb-2 mb-lg-0">
         <button type="button" class="btn btn-secondary">
-          <a style="color: rgb(255, 255, 255); text-decoration: none" href="/login">SIGN IN</a>
+          <a style="color: rgb(255, 255, 255); text-decoration: none" href="/login">USER LOGIN</a>
         </button>
       </span>
     </div>
 
+    <div class="nav navbar-nav navbar-right">
+      <span class="navbar-nav me-auto mb-2 mb-lg-0">
+        <button type="button" class="btn btn-primary">
+          <a style="color: rgb(255, 255, 255); text-decoration: none" href="/sign_in_admin">ADMIN LOGIN</a>
+        </button>
+      </span>
+    </div>
     {% endif %}
   </div>
 </nav>

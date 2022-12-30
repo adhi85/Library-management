@@ -2,14 +2,15 @@ from django.shortcuts import render
 from django.core.cache import cache
 from django.conf import settings
 from django.shortcuts import render, redirect
-from .models import Book
+from .models import Book, User
 from django.contrib import messages
-from .forms import NewUserForm
+from .forms import NewUserForm,NewBookForm
 from django.db.models import Q
 # Create your views here.
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import auth
 
 
 def home(request):
@@ -21,6 +22,31 @@ def home(request):
     return render(request, 'base/home.html', context)
 
 
+def sign_in_admin(request):
+
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+            if (user.is_superuser == True):
+                    login(request, user)
+
+                    return redirect('home')
+            else:
+                    messages.error(
+                        request, 'Please enter the correct username and password for a admin account.')
+                    return redirect('sign_in_admin')
+        else:
+             messages.error(
+                 request, 'Please enter the correct username and password for a admin account.')
+             return redirect('sign_in_admin')
+
+    else:
+      return render(request, 'base/signin_admin.html')
+
 def login_user(request):
     if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)
@@ -30,9 +56,12 @@ def login_user(request):
             user = authenticate(username=username, password=password)
 
             if user is not None:
-                login(request, user)
-                messages.info(request, f"You are now logged in as {username}.")
-                return redirect("home")
+                if (user.is_superuser == True):
+                    messages.error(request, "Please use Admin Sign in if you are an Admin.")
+                else:
+                    login(request, user)
+                    messages.info(request, f"You are now logged in as {username}.")
+                    return redirect("home")
             else:
                 messages.error(request, "Invalid username or password.")
         else:
@@ -81,13 +110,13 @@ def mycart(request):
 @login_required(login_url='/login')
 def confirm(request, pk):
 
-    if cache.get(pk):
-        book = cache.get(pk)
+    # if cache.get(pk):
+    #     book = cache.get(pk)
 
-    else:
-        book = Book.objects.get(id=pk)
-        cache.set(pk, book)
-
+    # else:
+    #     book = Book.objects.get(id=pk)
+    #     cache.set(pk, book)
+    book = Book.objects.get(id=pk)
     user = request.user
 
     def delete_copy(book):
@@ -99,11 +128,13 @@ def confirm(request, pk):
             messages.error(request, 'You cannot borrow more than 2 books.')
 
         elif (user.book1 == "no" and book.name != user.book2):
+            print("hi 1")
             user.book1 = book.name
             delete_copy(book)
             user.save()
             return redirect('mycart')
         elif (user.book2 == "no" and book.name != user.book1):
+            print("hi 2")
             user.book2 = book.name
             delete_copy(book)
             user.save()
@@ -117,13 +148,14 @@ def confirm(request, pk):
 @login_required(login_url='/login')
 def return_book(request, pk):
 
-    if cache.get(pk):
-        book = cache.get(pk)
+    # if cache.get(pk):
+    #     book = cache.get(pk)
 
-    else:
-        book = Book.objects.get(id=pk)
-        cache.set(pk, book)
+    # else:
+    #     book = Book.objects.get(id=pk)
+    #     cache.set(pk, book)
 
+    book = Book.objects.get(id=pk)
     user = request.user
 
     def add_copy(book):
@@ -133,12 +165,14 @@ def return_book(request, pk):
     if request.method == 'POST':
         if (user.book1 == book.name):
             user.book1 = "no"
+            print("hello 1")
             add_copy(book)
             user.save()
             return redirect('mycart')
 
         elif (user.book2 == book.name):
             user.book2 = "no"
+            print("hello 2")
             user.save()
             add_copy(book)
             return redirect('mycart')
@@ -159,3 +193,49 @@ def allbooks(request):
     )
 
     return render(request, 'base/allbooks.html', {'book': book, 'all': all})
+
+def deletebook(request):
+    all = Book.objects.all()
+
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
+
+    book = Book.objects.filter(
+        Q(name__icontains=q) |
+        Q(author__icontains=q)
+    )
+
+    return render(request, 'base/deletebooks.html', {'book': book, 'all': all})
+
+@login_required(login_url='/login')
+def addBook(request):
+    form = NewBookForm()
+    
+    if request.method == "POST":
+        form = NewBookForm(request.POST)
+        if form.is_valid():
+            
+            f=form.save(commit=False)
+            f.save()
+
+            return redirect('allbooks') 
+        else:
+            form = NewBookForm()
+    return render(request, 'base/addbook.html', {'form': form})
+
+@login_required(login_url='/login')
+def delete(request, pk):
+    book = Book.objects.get(id=pk)
+    if request.method == 'POST':
+        book.copies = 0
+        book.save()
+        return redirect('allbooks')
+        
+    return render(request, 'base/delete.html', {'book': book})
+
+@login_required(login_url='/login')
+def list(request):
+    ad = request.user
+    if ad.is_superuser != True:
+        return redirect('allbooks')
+    users = User.objects.all()
+    return render(request, 'base/list.html', {'users': users})
