@@ -1,15 +1,17 @@
 #READ ME
 
+DEPLOYED SITE: https://library-management-production.up.railway.app/
+
 TIME TO COMPLETE THE ASSIGNMENT : 2.5 DAYS
 
 REQUIREMENTS
 
 Implemented the website using Python Django.
-Used Redis with Mysql Database.
+Used with PostgreSQL Database.
 Used Html,Javascript and CSS with Django Templating engine.
 Used Bootstrap for styling.
 Used virtual environment.
-The website is connected with Mysql database.
+The website is connected with PostgreSQL database.
 
 
 
