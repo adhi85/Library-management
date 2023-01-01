@@ -22,13 +22,12 @@
           </div>
         </div>
         {% for books in book %}
-        {% if books.copies > 0 %}
         <div class="carousel-item" style="width: 100%; height: 100% !important">
           <div class="col-md-4">
             <div class="card card-body">
               <img class="img-fluid" src="{{books.coverpage}}" style="width: 100%; height: 400px" />
 
-              
+              {% if books.copies > 0 %}
               <div style="width: 100%">
                 <!-- <h5 style="text-transform:uppercase ;" class="card-title">{{books.name}}</h5> -->
 
@@ -40,18 +39,17 @@
               <a href="{% url 'confirm' books.id %}" class="btn font-weight-light"
                 style="background-color: rgb(195, 90, 90); color: white">BORROW</a>
 
-              <!-- {% else %}
+              {% else %}
               <hr />
               <div style="height: 75px; width: 100%">
                 <h5 class="font-weight-light">
                   BOOK IS NOT AVAILABLE TO BORROW
                 </h5>
-              </div> -->
-              
+              </div>
+              {% endif %}
             </div>
           </div>
         </div>
-        {% endif %}
         {% endfor %}
       </div>
       <a class="carousel-control-prev w-auto" href="#recipeCarousel" role="button" data-slide="prev">
