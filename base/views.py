@@ -196,7 +196,9 @@ def allbooks(request):
 
 def deletebook(request):
     all = Book.objects.all()
-
+    ad = request.user
+    if ad.is_superuser != True:
+        return redirect('allbooks')
     q = request.GET.get('q') if request.GET.get('q') != None else ''
 
     book = Book.objects.filter(
@@ -209,7 +211,9 @@ def deletebook(request):
 @login_required(login_url='/login')
 def addBook(request):
     form = NewBookForm()
-    
+    ad = request.user
+    if ad.is_superuser != True:
+        return redirect('allbooks')
     if request.method == "POST":
         form = NewBookForm(request.POST)
         if form.is_valid():
@@ -225,6 +229,9 @@ def addBook(request):
 @login_required(login_url='/login')
 def delete(request, pk):
     book = Book.objects.get(id=pk)
+    ad = request.user
+    if ad.is_superuser != True:
+        return redirect('allbooks')
     if request.method == 'POST':
         book.copies = 0
         book.save()
