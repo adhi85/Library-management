@@ -11,6 +11,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import auth
+from django.views.decorators.csrf import csrf_exempt
 
 
 def home(request):
@@ -21,7 +22,7 @@ def home(request):
     context = {'book': book, 'book_trending': book_trending}
     return render(request, 'base/home.html', context)
 
-
+@csrf_exempt
 def sign_in_admin(request):
 
     if request.method == 'POST':
@@ -46,7 +47,7 @@ def sign_in_admin(request):
 
     else:
       return render(request, 'base/signin_admin.html')
-
+@csrf_exempt
 def login_user(request):
     if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)
@@ -69,7 +70,7 @@ def login_user(request):
     form = AuthenticationForm()
     return render(request, "base/login.html", {"form": form})
 
-
+@csrf_exempt
 def register_user(request):
     if request.method == "POST":
         form = NewUserForm(request.POST)
@@ -83,7 +84,7 @@ def register_user(request):
     form = NewUserForm()
     return render(request, "base/register.html", {"form": form})
 
-
+@csrf_exempt
 def logout_user(request):
     logout(request)
     messages.info(request, "You have successfully logged out.")
@@ -106,7 +107,7 @@ def mycart(request):
     context = {'user': user, "buk1": buk1, "buk2": buk2}
     return render(request, 'base/mycart.html', context)
 
-
+@csrf_exempt
 @login_required(login_url='/login')
 def confirm(request, pk):
 
@@ -144,7 +145,7 @@ def confirm(request, pk):
 
     return render(request, 'base/confirm.html', {'book': book})
 
-
+@csrf_exempt
 @login_required(login_url='/login')
 def return_book(request, pk):
 
@@ -208,6 +209,7 @@ def deletebook(request):
 
     return render(request, 'base/deletebooks.html', {'book': book, 'all': all})
 
+@csrf_exempt
 @login_required(login_url='/login')
 def addBook(request):
     form = NewBookForm()
@@ -226,6 +228,7 @@ def addBook(request):
             form = NewBookForm()
     return render(request, 'base/addbook.html', {'form': form})
 
+@csrf_exempt
 @login_required(login_url='/login')
 def delete(request, pk):
     book = Book.objects.get(id=pk)
