@@ -86,36 +86,36 @@ WSGI_APPLICATION = 'library.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'library',
-        'USER': 'root',
-        'PASSWORD': 'muthanikatt',
-        'PORT': 3306,
-        'HOST': '127.0.0.1',
-    }
-}
-
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'railway',
+#         'NAME': 'library',
 #         'USER': 'root',
-#         'PASSWORD': 'AwSipg8vd2K6HHJLqq12',
-#         'PORT': 7084,
-#         'HOST': 'containers-us-west-154.railway.app',
+#         'PASSWORD': 'muthanikatt',
+#         'PORT': 3306,
+#         'HOST': '127.0.0.1',
 #     }
 # }
-CACHES = {
-    "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/1",
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
-        }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'railway',
+        'USER': 'root',
+        'PASSWORD': 'AwSipg8vd2K6HHJLqq12',
+        'PORT': 7084,
+        'HOST': 'containers-us-west-154.railway.app',
     }
 }
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django_redis.cache.RedisCache",
+#         "LOCATION": "redis://127.0.0.1:6379/1",
+#         "OPTIONS": {
+#             "CLIENT_CLASS": "django_redis.client.DefaultClient",
+#         }
+#     }
+# }
 
 
 # Password validation
