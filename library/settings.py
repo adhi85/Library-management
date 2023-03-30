@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-4o8tuxa+gm8cnzg9*l5)0pb4vdh*sjv!6(=ch#0ve7=8h5sn+8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['library-management-production.up.railway.app','127.0.0.1']
+ALLOWED_HOSTS = ['web-production-d8c8.up.railway.app','127.0.0.1']
 
 
 # Application definition
@@ -58,6 +58,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'skywalking.middleware.SkywalkingMiddleware',
+
 ]
 
 ROOT_URLCONF = 'library.urls'
@@ -165,3 +168,9 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SKYWALKING = {
+    "SERVICE_NAME": "library -management",
+    "DIRECT_SERVER": "20.169.228.240:11800",
+}
+
